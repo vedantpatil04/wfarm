@@ -452,6 +452,90 @@ function Work() {
   );
 }
 
+const teamMembers = [
+  { num: "01", name: "Vedant Patil", role: "Developer" },
+  { num: "02", name: "Om Mohite", role: "Developer" },
+];
+
+const partners = [
+  { num: "01", name: "Abhishek Sharma", role: "Founder — Earneazi & 36 Spokes" },
+  { num: "02", name: "Simran Kathuria", role: "Founder — 36 Spokes & TheWolfHouse Event" },
+];
+
+function TeamAndPartners() {
+  return (
+    <section className="team_root layout-block-inner" id="team" aria-labelledby="team-heading">
+      <div className="team_grid">
+        {/* Editorial Heading Column */}
+        <div className="team_headerCol team_header__reveal">
+          <div className="label-pixel team_mark">
+            <span className="team_markSlash" aria-hidden="true">/</span> Team
+          </div>
+          <h2 id="team-heading" className="team_heading">
+            The people behind WebFarm.
+          </h2>
+        </div>
+
+        {/* Editorial Rows Column */}
+        <div className="team_contentCol team_groups">
+          {/* Sub-group: Our Team */}
+          <div className="team_group">
+            <div className="team_subheadingRow">
+              <span className="team_subheading">Our Team</span>
+            </div>
+            <ul className="team_list" role="list">
+              {teamMembers.map((member) => (
+                <li key={member.name} className="team_row">
+                  <div className="team_rowLeft">
+                    <span className="team_rowNum" aria-hidden="true">{member.num}</span>
+                    <span className="team_rowName">{member.name}</span>
+                  </div>
+                  <div className="team_rowRight">
+                    <span className="team_rowRole">{member.role}</span>
+                    <span className="team_rowIndicator" aria-hidden="true">
+                      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Sub-group: Our Partners */}
+          <div className="team_group team_groupPartners">
+            <div className="team_subheadingRow">
+              <span className="label-pixel team_groupLabel">
+                <span className="team_markSlash" aria-hidden="true">/</span> Partners
+              </span>
+              <span className="team_subheading">Our Partners</span>
+            </div>
+            <ul className="team_list" role="list">
+              {partners.map((partner) => (
+                <li key={partner.name} className="team_row">
+                  <div className="team_rowLeft">
+                    <span className="team_rowNum" aria-hidden="true">{partner.num}</span>
+                    <span className="team_rowName">{partner.name}</span>
+                  </div>
+                  <div className="team_rowRight">
+                    <span className="team_rowRole">{partner.role}</span>
+                    <span className="team_rowIndicator" aria-hidden="true">
+                      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactCTA() {
   return (
     <section className="preFooter_root__Zxcjj layout-block-inner" id="contact">
@@ -684,6 +768,7 @@ export function HomePage() {
           <Process />
           <ProofAndMetrics />
           <Work />
+          <TeamAndPartners />
           <ContactCTA />
         </main>
         <Footer />

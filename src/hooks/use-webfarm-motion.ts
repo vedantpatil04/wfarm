@@ -247,6 +247,36 @@ export function useWebFarmMotion(rootRef: RefObject<HTMLElement | null>, ready: 
             });
           });
 
+          // 7.5. TEAM & PARTNERS
+          gsap.from(".team_header__reveal > *", {
+            y: 20,
+            autoAlpha: 0,
+            stagger: 0.08,
+            duration: 0.65,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".team_root",
+              start: "top 82%",
+              once: true,
+            },
+          });
+
+          const teamRows = gsap.utils.toArray<HTMLElement>(".team_row");
+          if (teamRows.length) {
+            gsap.from(teamRows, {
+              y: 20,
+              autoAlpha: 0,
+              stagger: 0.07,
+              duration: 0.6,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: ".team_contentCol",
+                start: "top 84%",
+                once: true,
+              },
+            });
+          }
+
           // 8. PRE-FOOTER (CONTACT CTA)
           gsap.from(".preFooter_panel__FE39v", {
             y: 24,

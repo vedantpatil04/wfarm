@@ -1810,6 +1810,212 @@ ul, ol {
 }
 
 /* ==========================================================================
+   Team & Partners Section
+   ========================================================================== */
+
+.team_root {
+  position: relative;
+  background-color: var(--paper);
+  color: var(--text-strong);
+  padding-top: calc(var(--layout-columns-gap) * 3);
+  padding-bottom: calc(var(--layout-columns-gap) * 3);
+  border-top: 1px solid var(--hairline);
+}
+
+.team_grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: calc(var(--layout-columns-gap) * 2.4);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .team_grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--layout-columns-gap) * 1.6);
+  }
+}
+
+.team_headerCol {
+  position: relative;
+}
+
+@media (min-width: 901px) {
+  .team_headerCol {
+    position: sticky;
+    top: clamp(80px, 8vw, 110px);
+  }
+}
+
+.team_mark {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.team_markSlash {
+  color: var(--amber-ink);
+}
+
+.team_heading {
+  font-family: var(--font-pixel), var(--font-display), sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 50px);
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  color: var(--text-strong);
+  max-width: 14ch;
+}
+
+.team_contentCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.team_group {
+  display: flex;
+  flex-direction: column;
+}
+
+.team_groupPartners {
+  margin-top: calc(var(--layout-columns-gap) * 2.2);
+}
+
+.team_subheadingRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
+.team_subheading {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  font-weight: 500;
+}
+
+.team_groupLabel {
+  margin: 0;
+}
+
+.team_list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--hairline);
+}
+
+.team_row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: clamp(20px, 2.2vw, 30px) 0;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.team_row:hover {
+  border-bottom-color: var(--hairline-strong);
+}
+
+.team_rowLeft {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(14px, 1.8vw, 28px);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.team_rowNum {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(12px, 0.95vw, 15px);
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+  width: 22px;
+  flex-shrink: 0;
+  transition: color 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_rowNum {
+  color: var(--amber-ink);
+}
+
+.team_rowName {
+  font-family: var(--font-secondary), sans-serif;
+  font-weight: 650;
+  font-size: clamp(19px, 1.7vw, 26px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--text-strong);
+  transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_rowName {
+  transform: translateX(5px);
+}
+
+.team_rowRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.team_rowRole {
+  font-family: var(--font-secondary), sans-serif;
+  font-weight: 450;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--text-muted);
+  transition: color 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_rowRole {
+  color: var(--text-strong);
+}
+
+.team_rowIndicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  color: var(--amber-ink);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_rowIndicator {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 680px) {
+  .team_row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 16px 0;
+  }
+
+  .team_rowRight {
+    text-align: left;
+    padding-left: calc(22px + clamp(14px, 1.8vw, 28px));
+  }
+
+  .team_rowIndicator {
+    display: none;
+  }
+}
+
+/* ==========================================================================
    Pre-Footer Contact CTA
    ========================================================================== */
 
