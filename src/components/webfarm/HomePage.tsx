@@ -102,7 +102,7 @@ function Hero() {
     return () => clearInterval(timer);
   }, []);
 
-  const currentPhase = buildingPhases[phaseIdx];
+  const currentPhase = buildingPhases[phaseIdx] ?? buildingPhases[0]!;
 
   return (
     <section className="home_root__h_YgT" id="top">
@@ -300,7 +300,7 @@ function Process() {
 
 function ProofAndMetrics() {
   const [quoteIdx, setQuoteIdx] = useState(0);
-  const quote = clientQuotes[quoteIdx];
+  const quote = clientQuotes[quoteIdx] ?? clientQuotes[0]!;
 
   return (
     <section className="clients_root__4y9IF" id="proof">
