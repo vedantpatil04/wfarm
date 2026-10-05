@@ -791,7 +791,7 @@ ul, ol {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 48%;
+  object-position: 74% 48%;
   display: block;
 }
 
@@ -1859,11 +1859,20 @@ ul, ol {
 .team_heading {
   font-family: var(--font-pixel), var(--font-display), sans-serif;
   font-weight: 400;
-  font-size: clamp(32px, 3.4vw, 50px);
-  line-height: 1.04;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.05;
   letter-spacing: 0.01em;
   color: var(--text-strong);
   max-width: 14ch;
+}
+
+.team_introSub {
+  font-family: var(--font-secondary), sans-serif;
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 26ch;
+  margin-top: 18px;
 }
 
 .team_contentCol {
@@ -1877,7 +1886,7 @@ ul, ol {
 }
 
 .team_groupPartners {
-  margin-top: calc(var(--layout-columns-gap) * 2.2);
+  margin-top: calc(var(--layout-columns-gap) * 2.8);
 }
 
 .team_subheadingRow {
@@ -1912,27 +1921,58 @@ ul, ol {
   align-items: baseline;
   justify-content: space-between;
   gap: 20px;
-  padding: clamp(20px, 2.2vw, 30px) 0;
+  padding: clamp(20px, 2.2vw, 28px) clamp(8px, 1.2vw, 14px);
   border-bottom: 1px solid var(--hairline);
   position: relative;
-  transition: border-color 0.25s var(--ease-out);
+  cursor: default;
+  outline: none;
+  background-color: transparent;
+  transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
 }
 
-.team_row:hover {
+.team_row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--amber-ink);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.team_row:hover,
+.team_row:focus-visible,
+.team_row--active {
+  background-color: rgba(0, 0, 0, 0.016);
   border-bottom-color: var(--hairline-strong);
+}
+
+.team_row:hover::before,
+.team_row:focus-visible::before,
+.team_row--active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.team_row:focus-visible {
+  outline: 1px dashed var(--amber-ink);
+  outline-offset: -1px;
 }
 
 .team_rowLeft {
   display: flex;
   align-items: baseline;
-  gap: clamp(14px, 1.8vw, 28px);
+  gap: clamp(12px, 1.6vw, 22px);
   flex: 1 1 auto;
   min-width: 0;
 }
 
 .team_rowNum {
   font-family: var(--font-pixel), monospace;
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(12px, 0.95vw, 14px);
   color: var(--text-faint);
   letter-spacing: 0.04em;
   width: 22px;
@@ -1940,8 +1980,45 @@ ul, ol {
   transition: color 0.25s var(--ease-out);
 }
 
-.team_row:hover .team_rowNum {
+.team_row:hover .team_rowNum,
+.team_row:focus-visible .team_rowNum,
+.team_row--active .team_rowNum {
   color: var(--amber-ink);
+}
+
+/* Subtle Geometric Initials Preview */
+.team_initialBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-pixel), monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  flex-shrink: 0;
+  align-self: center;
+  transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_initialBadge,
+.team_row:focus-visible .team_initialBadge,
+.team_row--active .team_initialBadge {
+  color: var(--text-strong);
+  border-color: var(--amber-ink);
+  background: rgba(255, 184, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.team_nameBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .team_rowName {
@@ -1954,64 +2031,74 @@ ul, ol {
   transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
 }
 
-.team_row:hover .team_rowName {
+.team_row:hover .team_rowName,
+.team_row:focus-visible .team_rowName,
+.team_row--active .team_rowName {
   transform: translateX(5px);
+}
+
+.team_rowDescription {
+  font-family: var(--font-secondary), sans-serif;
+  font-weight: 450;
+  font-size: clamp(13px, 0.95vw, 15px);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--text-muted);
+  transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.team_row:hover .team_rowDescription,
+.team_row:focus-visible .team_rowDescription,
+.team_row--active .team_rowDescription {
+  transform: translateX(5px);
+  color: var(--text-strong);
 }
 
 .team_rowRight {
   display: flex;
   align-items: center;
-  gap: 8px;
   flex-shrink: 0;
   text-align: right;
+  padding-right: 4px;
 }
 
-.team_rowRole {
-  font-family: var(--font-secondary), sans-serif;
-  font-weight: 450;
-  font-size: clamp(14px, 1vw, 16px);
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  color: var(--text-muted);
-  transition: color 0.25s var(--ease-out);
-}
-
-.team_row:hover .team_rowRole {
-  color: var(--text-strong);
-}
-
-.team_rowIndicator {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 14px;
-  height: 14px;
+.team_rowArrow {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1;
   color: var(--amber-ink);
-  opacity: 0;
+  opacity: 0.18;
   transform: translateX(-4px);
   transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
 }
 
-.team_row:hover .team_rowIndicator {
+.team_row:hover .team_rowArrow,
+.team_row:focus-visible .team_rowArrow,
+.team_row--active .team_rowArrow {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(2px);
 }
 
 @media (max-width: 680px) {
   .team_row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    padding: 16px 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 2px;
   }
 
-  .team_rowRight {
-    text-align: left;
-    padding-left: calc(22px + clamp(14px, 1.8vw, 28px));
+  .team_rowLeft {
+    gap: 12px;
   }
 
-  .team_rowIndicator {
+  .team_initialBadge {
     display: none;
+  }
+
+  .team_rowArrow {
+    opacity: 0.5;
+    transform: translateX(0);
   }
 }
 

@@ -247,13 +247,8 @@ export function useWebFarmMotion(rootRef: RefObject<HTMLElement | null>, ready: 
             });
           });
 
-          // 7.5. TEAM & PARTNERS
-          gsap.from(".team_header__reveal > *", {
-            y: 20,
-            autoAlpha: 0,
-            stagger: 0.08,
-            duration: 0.65,
-            ease: "power2.out",
+          // 7.5. TEAM & PARTNERS — SEQUENCED EDITORIAL REVEAL
+          const teamTl = gsap.timeline({
             scrollTrigger: {
               trigger: ".team_root",
               start: "top 82%",
@@ -261,21 +256,56 @@ export function useWebFarmMotion(rootRef: RefObject<HTMLElement | null>, ready: 
             },
           });
 
-          const teamRows = gsap.utils.toArray<HTMLElement>(".team_row");
-          if (teamRows.length) {
-            gsap.from(teamRows, {
-              y: 20,
+          teamTl
+            .from(".team_header__reveal > *", {
+              y: 16,
               autoAlpha: 0,
-              stagger: 0.07,
-              duration: 0.6,
+              stagger: 0.08,
+              duration: 0.65,
               ease: "power2.out",
-              scrollTrigger: {
-                trigger: ".team_contentCol",
-                start: "top 84%",
-                once: true,
+            })
+            .from(
+              ".team_group:first-child .team_subheadingRow",
+              {
+                autoAlpha: 0,
+                x: -12,
+                duration: 0.45,
+                ease: "power2.out",
               },
-            });
-          }
+              "-=0.3",
+            )
+            .from(
+              ".team_group:first-child .team_row",
+              {
+                autoAlpha: 0,
+                x: -16,
+                stagger: 0.08,
+                duration: 0.55,
+                ease: "power2.out",
+              },
+              "-=0.2",
+            )
+            .from(
+              ".team_groupPartners .team_subheadingRow",
+              {
+                autoAlpha: 0,
+                x: -12,
+                duration: 0.45,
+                ease: "power2.out",
+              },
+              "-=0.2",
+            )
+            .from(
+              ".team_groupPartners .team_row",
+              {
+                autoAlpha: 0,
+                x: -16,
+                stagger: 0.08,
+                duration: 0.55,
+                ease: "power2.out",
+              },
+              "-=0.2",
+            );
 
           // 8. PRE-FOOTER (CONTACT CTA)
           gsap.from(".preFooter_panel__FE39v", {

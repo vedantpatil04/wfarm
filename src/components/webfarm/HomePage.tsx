@@ -4,7 +4,7 @@ import { Preloader } from "./Preloader";
 import { Project } from "./Project";
 import { ServiceIcon } from "./ServiceIcon";
 import { useWebFarmMotion } from "@/hooks/use-webfarm-motion";
-import heroImage from "@/assets/webfarm-hero.jpg";
+import heroImage from "@/assets/webfarm-hero.webp";
 import earneaziImage from "@/assets/earneazi.jpg";
 import greenGuardImage from "@/assets/greenguard.jpg";
 import spokesImage from "@/assets/spokes.jpg";
@@ -125,7 +125,7 @@ function Hero() {
           <img
             className="heroShowcase_world__ncTmF"
             src={heroImage}
-            alt="WebFarm digital engineering studio"
+            alt="Pixel-art city park with a laptop running code on a picnic blanket, a crane on the skyline"
           />
           {/* Restrained floating status pill */}
           <div className="heroShowcase_pillStack__kGwfh" aria-hidden="true">
@@ -452,17 +452,47 @@ function Work() {
   );
 }
 
-const teamMembers = [
-  { num: "01", name: "Vedant Patil", role: "Developer" },
-  { num: "02", name: "Om Mohite", role: "Developer" },
+interface TeamPerson {
+  num: string;
+  name: string;
+  initials: string;
+  role?: string;
+  description?: string;
+}
+
+const teamMembers: TeamPerson[] = [
+  {
+    num: "01",
+    name: "Vedant Patil",
+    initials: "VP",
+    role: "Lead Developer",
+  },
+  {
+    num: "02",
+    name: "Om Mohite",
+    initials: "OM",
+    role: "Developer",
+  },
 ];
 
-const partners = [
-  { num: "01", name: "Abhishek Sharma", role: "Founder — Earneazi & 36 Spokes" },
-  { num: "02", name: "Simran Kathuria", role: "Founder — 36 Spokes & TheWolfHouse Event" },
+const partners: TeamPerson[] = [
+  {
+    num: "01",
+    name: "Abhishek Sharma",
+    initials: "AS",
+    description: "(Founder of Earneazi & 36Spokes)",
+  },
+  {
+    num: "02",
+    name: "Simran Kathuria",
+    initials: "SK",
+    description: "(Founder of 36spokes and TheWolfHouse Events)",
+  },
 ];
 
 function TeamAndPartners() {
+  const [activePerson, setActivePerson] = useState<string | null>(null);
+
   return (
     <section className="team_root layout-block-inner" id="team" aria-labelledby="team-heading">
       <div className="team_grid">
@@ -472,34 +502,51 @@ function TeamAndPartners() {
             <span className="team_markSlash" aria-hidden="true">/</span> Team
           </div>
           <h2 id="team-heading" className="team_heading">
-            The people behind WebFarm.
+            The people
+            <br />
+            behind
+            <br />
+            WebFarm.
           </h2>
+          <p className="team_introSub">
+            Built by developers, strengthened by people who know the business.
+          </p>
         </div>
 
         {/* Editorial Rows Column */}
-        <div className="team_contentCol team_groups">
+        <div className="team_contentCol team_groups" onMouseLeave={() => setActivePerson(null)}>
           {/* Sub-group: Our Team */}
           <div className="team_group">
             <div className="team_subheadingRow">
-              <span className="team_subheading">Our Team</span>
+              <span className="team_subheading">OUR TEAM</span>
             </div>
             <ul className="team_list" role="list">
-              {teamMembers.map((member) => (
-                <li key={member.name} className="team_row">
-                  <div className="team_rowLeft">
-                    <span className="team_rowNum" aria-hidden="true">{member.num}</span>
-                    <span className="team_rowName">{member.name}</span>
-                  </div>
-                  <div className="team_rowRight">
-                    <span className="team_rowRole">{member.role}</span>
-                    <span className="team_rowIndicator" aria-hidden="true">
-                      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-              ))}
+              {teamMembers.map((member) => {
+                const isActive = activePerson === member.name;
+                return (
+                  <li
+                    key={member.name}
+                    className={`team_row ${isActive ? "team_row--active" : ""}`}
+                    tabIndex={0}
+                    aria-label={`${member.name}, ${member.role}`}
+                    onMouseEnter={() => setActivePerson(member.name)}
+                    onFocus={() => setActivePerson(member.name)}
+                    onBlur={() => setActivePerson(null)}
+                  >
+                    <div className="team_rowLeft">
+                      <span className="team_rowNum" aria-hidden="true">{member.num}</span>
+                      <span className="team_initialBadge" aria-hidden="true">{member.initials}</span>
+                      <div className="team_nameBlock">
+                        <span className="team_rowName">{member.name}</span>
+                        <span className="team_rowDescription">{member.role}</span>
+                      </div>
+                    </div>
+                    <div className="team_rowRight" aria-hidden="true">
+                      <span className="team_rowArrow">→</span>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -509,25 +556,35 @@ function TeamAndPartners() {
               <span className="label-pixel team_groupLabel">
                 <span className="team_markSlash" aria-hidden="true">/</span> Partners
               </span>
-              <span className="team_subheading">Our Partners</span>
+              <span className="team_subheading">OUR PARTNERS</span>
             </div>
             <ul className="team_list" role="list">
-              {partners.map((partner) => (
-                <li key={partner.name} className="team_row">
-                  <div className="team_rowLeft">
-                    <span className="team_rowNum" aria-hidden="true">{partner.num}</span>
-                    <span className="team_rowName">{partner.name}</span>
-                  </div>
-                  <div className="team_rowRight">
-                    <span className="team_rowRole">{partner.role}</span>
-                    <span className="team_rowIndicator" aria-hidden="true">
-                      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </span>
-                  </div>
-                </li>
-              ))}
+              {partners.map((partner) => {
+                const isActive = activePerson === partner.name;
+                return (
+                  <li
+                    key={partner.name}
+                    className={`team_row ${isActive ? "team_row--active" : ""}`}
+                    tabIndex={0}
+                    aria-label={`${partner.name}, ${partner.description}`}
+                    onMouseEnter={() => setActivePerson(partner.name)}
+                    onFocus={() => setActivePerson(partner.name)}
+                    onBlur={() => setActivePerson(null)}
+                  >
+                    <div className="team_rowLeft">
+                      <span className="team_rowNum" aria-hidden="true">{partner.num}</span>
+                      <span className="team_initialBadge" aria-hidden="true">{partner.initials}</span>
+                      <div className="team_nameBlock">
+                        <span className="team_rowName">{partner.name}</span>
+                        <span className="team_rowDescription">{partner.description}</span>
+                      </div>
+                    </div>
+                    <div className="team_rowRight" aria-hidden="true">
+                      <span className="team_rowArrow">→</span>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
