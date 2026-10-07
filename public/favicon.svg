@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <!-- Square warm-grey/ivory surface with subtle border for high contrast in light & dark browser tabs -->
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="5" fill="#F4F1EA" stroke="#14181F" stroke-opacity="0.14" stroke-width="1.5" />
+  
+  <!-- Subtle warm-yellow brand accent -->
+  <rect x="23" y="6" width="3" height="3" rx="0.5" fill="#FFB800" />
+  
+  <!-- Clean geometric editorial WF lettering -->
+  <path d="M6 10.5L8.2 21H10.5L12 14.5L13.5 21H15.8L18 10.5H16L14.7 17.5L13.2 10.5H10.8L9.3 17.5L8 10.5H6Z" fill="#14181F" />
+  <path d="M19.5 10.5H25.5V12.6H21.7V15H24.8V17H21.7V21H19.5V10.5Z" fill="#14181F" />
+</svg>

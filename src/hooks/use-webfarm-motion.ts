@@ -282,6 +282,7 @@ export function useWebFarmMotion(rootRef: RefObject<HTMLElement | null>, ready: 
                 stagger: 0.08,
                 duration: 0.55,
                 ease: "power2.out",
+                clearProps: "all",
               },
               "-=0.2",
             )
@@ -303,6 +304,7 @@ export function useWebFarmMotion(rootRef: RefObject<HTMLElement | null>, ready: 
                 stagger: 0.08,
                 duration: 0.55,
                 ease: "power2.out",
+                clearProps: "all",
               },
               "-=0.2",
             );

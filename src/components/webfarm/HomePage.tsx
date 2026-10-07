@@ -71,7 +71,7 @@ const clientQuotes = [
   {
     quote: "WebFarm took our product vision from concept to a living, production-ready system with remarkable engineering ownership and attention to detail.",
     author: "Abhishek Sharma",
-    role: "Co-Founder, Earneazi",
+    role: "Founder, Earneazi",
   },
   {
     quote: "Working with WebFarm felt like having our own senior in-house engineering team. Fast, dependable, and zero fluff.",
@@ -86,10 +86,10 @@ const clientQuotes = [
 ];
 
 const buildingPhases = [
-  { dot: "active", label: "Now building", text: "Earneazi (earneazi.com)" },
-  { dot: "active", label: "Now building", text: "GreenGuard AI (greenguardai.in)" },
+  { dot: "done", label: "Shipped", text: "Earneazi (earneazi.com)" },
+  { dot: "done", label: "Shipped", text: "GreenGuard AI (greenguardai.in)" },
   { dot: "active", label: "Now building", text: "36 Spokes (Commerce)" },
-  { dot: "done", label: "Shipped", text: "MedFind (Health)" },
+  { dot: "active", label: "Now building", text: "MedFind (Health)" },
 ];
 
 function Hero() {
@@ -458,6 +458,8 @@ interface TeamPerson {
   initials: string;
   role?: string;
   description?: string;
+  websiteUrl: string | null;
+  linkedinUrl: string;
 }
 
 const teamMembers: TeamPerson[] = [
@@ -466,12 +468,16 @@ const teamMembers: TeamPerson[] = [
     name: "Vedant Patil",
     initials: "VP",
     role: "Lead Developer",
+    websiteUrl: "https://vedantpatil.co.in",
+    linkedinUrl: "https://www.linkedin.com/in/vedantpatilbca",
   },
   {
     num: "02",
     name: "Om Mohite",
     initials: "OM",
     role: "Developer",
+    websiteUrl: "https://ommohite.in",
+    linkedinUrl: "https://www.linkedin.com/in/om-mohite-9a5569327",
   },
 ];
 
@@ -481,12 +487,16 @@ const partners: TeamPerson[] = [
     name: "Abhishek Sharma",
     initials: "AS",
     description: "(Founder of Earneazi & 36Spokes)",
+    websiteUrl: null,
+    linkedinUrl: "https://www.linkedin.com/in/abhishek-sharma-25a291306",
   },
   {
     num: "02",
     name: "Simran Kathuria",
     initials: "SK",
     description: "(Founder of 36spokes and TheWolfHouse Events)",
+    websiteUrl: null,
+    linkedinUrl: "https://www.linkedin.com/in/simran-kathuria-62524a187",
   },
 ];
 
@@ -499,6 +509,14 @@ function TeamAndPartners() {
         {/* Editorial Heading Column */}
         <div className="team_headerCol team_header__reveal">
           <div className="label-pixel team_mark">
+            <img
+              src="/images/webfarm-wf-monogram.svg"
+              alt=""
+              aria-hidden="true"
+              className="team_wfMonogram"
+              width={20}
+              height={20}
+            />
             <span className="team_markSlash" aria-hidden="true">/</span> Team
           </div>
           <h2 id="team-heading" className="team_heading">
@@ -523,26 +541,62 @@ function TeamAndPartners() {
             <ul className="team_list" role="list">
               {teamMembers.map((member) => {
                 const isActive = activePerson === member.name;
+                const isInactive = activePerson !== null && !isActive;
                 return (
                   <li
                     key={member.name}
-                    className={`team_row ${isActive ? "team_row--active" : ""}`}
+                    className={`team_row ${isActive ? "team_row--active" : ""} ${isInactive ? "team_row--inactive" : ""}`}
                     tabIndex={0}
+                    role="listitem"
                     aria-label={`${member.name}, ${member.role}`}
                     onMouseEnter={() => setActivePerson(member.name)}
                     onFocus={() => setActivePerson(member.name)}
                     onBlur={() => setActivePerson(null)}
                   >
-                    <div className="team_rowLeft">
-                      <span className="team_rowNum" aria-hidden="true">{member.num}</span>
-                      <span className="team_initialBadge" aria-hidden="true">{member.initials}</span>
-                      <div className="team_nameBlock">
-                        <span className="team_rowName">{member.name}</span>
-                        <span className="team_rowDescription">{member.role}</span>
+                    <div className="team_rowTrack">
+                      <div className="team_rowLeft">
+                        <span className="team_rowNum" aria-hidden="true">{member.num}</span>
+                        <div className="team_nameBlock">
+                          <span className="team_rowName">{member.name}</span>
+                          <span className="team_rowDescription">{member.role}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="team_rowRight" aria-hidden="true">
-                      <span className="team_rowArrow">→</span>
+                      <div className="team_rowRight">
+                        <div className="team_rowLinks">
+                          {member.websiteUrl && (
+                            <a
+                              href={member.websiteUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="team_memberLink"
+                              aria-label={`${member.name}'s Website`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <span>Website</span>
+                              <span className="team_memberLinkArrow" aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                          {member.linkedinUrl && (
+                            <a
+                              href={member.linkedinUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="team_memberLink"
+                              aria-label={`${member.name}'s LinkedIn`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <span>LinkedIn</span>
+                              <span className="team_memberLinkArrow" aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                        </div>
+                        <span className="team_initialBadge" aria-hidden="true">{member.initials}</span>
+                        <span className="team_rowArrow" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 12h15M13 6l6 6-6 6" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
                   </li>
                 );
@@ -552,7 +606,7 @@ function TeamAndPartners() {
 
           {/* Sub-group: Our Partners */}
           <div className="team_group team_groupPartners">
-            <div className="team_subheadingRow">
+            <div className="team_subheadingRow team_subheadingRow--partners">
               <span className="label-pixel team_groupLabel">
                 <span className="team_markSlash" aria-hidden="true">/</span> Partners
               </span>
@@ -561,26 +615,62 @@ function TeamAndPartners() {
             <ul className="team_list" role="list">
               {partners.map((partner) => {
                 const isActive = activePerson === partner.name;
+                const isInactive = activePerson !== null && !isActive;
                 return (
                   <li
                     key={partner.name}
-                    className={`team_row ${isActive ? "team_row--active" : ""}`}
+                    className={`team_row ${isActive ? "team_row--active" : ""} ${isInactive ? "team_row--inactive" : ""}`}
                     tabIndex={0}
+                    role="listitem"
                     aria-label={`${partner.name}, ${partner.description}`}
                     onMouseEnter={() => setActivePerson(partner.name)}
                     onFocus={() => setActivePerson(partner.name)}
                     onBlur={() => setActivePerson(null)}
                   >
-                    <div className="team_rowLeft">
-                      <span className="team_rowNum" aria-hidden="true">{partner.num}</span>
-                      <span className="team_initialBadge" aria-hidden="true">{partner.initials}</span>
-                      <div className="team_nameBlock">
-                        <span className="team_rowName">{partner.name}</span>
-                        <span className="team_rowDescription">{partner.description}</span>
+                    <div className="team_rowTrack">
+                      <div className="team_rowLeft">
+                        <span className="team_rowNum" aria-hidden="true">{partner.num}</span>
+                        <div className="team_nameBlock">
+                          <span className="team_rowName">{partner.name}</span>
+                          <span className="team_rowDescription">{partner.description}</span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="team_rowRight" aria-hidden="true">
-                      <span className="team_rowArrow">→</span>
+                      <div className="team_rowRight">
+                        <div className="team_rowLinks">
+                          {partner.websiteUrl && (
+                            <a
+                              href={partner.websiteUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="team_memberLink"
+                              aria-label={`${partner.name}'s Website`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <span>Website</span>
+                              <span className="team_memberLinkArrow" aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                          {partner.linkedinUrl && (
+                            <a
+                              href={partner.linkedinUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="team_memberLink"
+                              aria-label={`${partner.name}'s LinkedIn`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <span>LinkedIn</span>
+                              <span className="team_memberLinkArrow" aria-hidden="true">↗</span>
+                            </a>
+                          )}
+                        </div>
+                        <span className="team_initialBadge" aria-hidden="true">{partner.initials}</span>
+                        <span className="team_rowArrow" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 12h15M13 6l6 6-6 6" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
                   </li>
                 );
